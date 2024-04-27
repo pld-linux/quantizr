@@ -13,7 +13,10 @@ BuildRequires:	cargo
 BuildRequires:	cargo-c
 BuildRequires:	rust
 BuildRequires:	rpmbuild(macros) >= 2.012
+ExclusiveArch:	%{rust_arches}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
+
+%define		_debugsource_packages	0
 
 %description
 Fast library for converting RGBA images to 8-bit palette images.
