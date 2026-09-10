@@ -1,13 +1,13 @@
 Summary:	Fast library for converting RGBA images to 8-bit palette images
 Summary(pl.UTF-8):	Szybka biblioteka do konwersji obrazów RGBA do obrazów 8-bitowych z paletą
 Name:		quantizr
-Version:	1.4.2
+Version:	1.4.3
 Release:	1
 License:	MIT
 Group:		Libraries
 #Source0Download: https://github.com/DarthSim/quantizr/releases
 Source0:	https://github.com/DarthSim/quantizr/archive/v%{version}/%{name}-%{version}.tar.gz
-# Source0-md5:	c39ed3268502ba531641d64f24b7e7c4
+# Source0-md5:	c5c04ba20c90f840c1467b1b267517bd
 URL:		https://github.com/DarthSim/quantizr
 BuildRequires:	cargo
 BuildRequires:	cargo-c
@@ -75,12 +75,12 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc LICENSE README.md
-%attr(755,root,root) %{_libdir}/libquantizr.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libquantizr.so.1
+%{_libdir}/libquantizr.so.*.*.*
+%ghost %{_libdir}/libquantizr.so.1
 
 %files devel
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libquantizr.so
+%{_libdir}/libquantizr.so
 %{_includedir}/quantizr
 %{_pkgconfigdir}/quantizr.pc
 
