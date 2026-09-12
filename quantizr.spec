@@ -16,8 +16,6 @@ BuildRequires:	rpmbuild(macros) >= 2.012
 ExclusiveArch:	%{rust_arches}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
-%define		_debugsource_packages	0
-
 %description
 Fast library for converting RGBA images to 8-bit palette images.
 
@@ -53,14 +51,24 @@ Statyczna biblioteka quantizr.
 %setup -q
 
 %build
-cargo -v cbuild --offline --release --target %{rust_target} \
+LDFLAGS="%{rpmldflags}" \
+PKG_CONFIG_ALLOW_CROSS=1 \
+RUSTC="%{__rustc}" \
+RUSTFLAGS="%{rpmrustflags}" \
+%{?__jobs:CARGO_BUILD_JOBS=%{__jobs}} \
+%{__cargo} %{__cargo_common_opts} cbuild --release --target %{rust_target} \
 	--prefix %{_prefix} \
 	--libdir %{_libdir}
 
 %install
 rm -rf $RPM_BUILD_ROOT
 
-cargo -v cinstall --frozen --release --target %{rust_target} \
+LDFLAGS="%{rpmldflags}" \
+PKG_CONFIG_ALLOW_CROSS=1 \
+RUSTC="%{__rustc}" \
+RUSTFLAGS="%{rpmrustflags}" \
+%{?__jobs:CARGO_BUILD_JOBS=%{__jobs}} \
+%{__cargo} %{__cargo_common_opts} cinstall --frozen --release --target %{rust_target} \
 	--destdir $RPM_BUILD_ROOT \
 	--prefix %{_prefix} \
 	--includedir %{_includedir} \
